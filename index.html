@@ -62,64 +62,8 @@
     </header>
     <div class="entry">
       
-        <h3 id="Build-the-blog-with-Hexo"><a href="#Build-the-blog-with-Hexo" class="headerlink" title="Build the blog with Hexo"></a>Build the blog with Hexo</h3><p>To be continue…</p>
+        <h3 id="Build-the-blog-with-Hexo"><a href="#Build-the-blog-with-Hexo" class="headerlink" title="Build the blog with Hexo"></a>Build the blog with Hexo</h3><h3 id="Change-domain"><a href="#Change-domain" class="headerlink" title="Change domain"></a>Change domain</h3><p>To be continue…</p>
 
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-04-01T03:59:50.000Z"><a href="/2016/04/01/GCD 术语/">2016-04-01</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/04/01/GCD 术语/"></a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h1 id="1-GCD-术语"><a href="#1-GCD-术语" class="headerlink" title="1.GCD 术语"></a>1.GCD 术语</h1><p>为了更好的理解GCD，你需要了解一些关于线程和并发的概念。它们会稍微有点难以理解和琢磨不透，所以让我们再简单地回顾下它们在GCD里的内容。</p>
-<h2 id="串行与并行-Serial-vs-Concurrent"><a href="#串行与并行-Serial-vs-Concurrent" class="headerlink" title="串行与并行 (Serial vs. Concurrent)"></a>串行与并行 (<em>Serial vs. Concurrent</em>)</h2><p>These terms describe <em>when</em> tasks are executed with respect to each other. Tasks executed <em>serially</em> are always executed one at a time. Tasks executed <em>concurrently</em> might be executed at the same time.</p>
-<h2 id="同步与异步-Synchronous-vs-Asynchronous"><a href="#同步与异步-Synchronous-vs-Asynchronous" class="headerlink" title="同步与异步 (Synchronous vs. Asynchronous)"></a>同步与异步 (<em>Synchronous vs. Asynchronous</em>)</h2><p>Within GCD, these terms describe when a function completes with respect to another task that the function asks GCD to perform. A <em>synchronous</em> function returns only after the completion of a task that it orders. An <em>asynchronous</em> function, on the other hand, returns immediately, ordering the task to be done but does not wait for it. Thus, an asynchronous function does not block the current thread of execution from proceeding on to the next function.</p>
-<h2 id="临界区-Critical-section"><a href="#临界区-Critical-section" class="headerlink" title="临界区 (Critical section)"></a>临界区 (<em>Critical section</em>)</h2><p>This is a piece of code that must <strong>not</strong> be executed concurrently, that is, from two threads at once. This is usually because the code manipulates a shared resource such as a variable that can become corrupt if it’s accessed by concurrent processes.</p>
-<h2 id="竞态条件-Race-condition"><a href="#竞态条件-Race-condition" class="headerlink" title="竞态条件 (Race condition)"></a>竞态条件 (<em>Race condition</em>)</h2><p>This is a situation where the behavior of a software system depends on a specific sequence or timing of events that execute in an uncontrolled manner, such as the exact order of execution of the program’s concurrent tasks. Race conditions can produce unpredictable behavior that aren’t immediately evident through code inspection.</p>
-<h2 id="死锁-Deadlock"><a href="#死锁-Deadlock" class="headerlink" title="死锁 (Deadlock)"></a>死锁 (<em>Deadlock</em>)</h2><p>Two (or sometimes more) items — in most cases, threads — are said to be deadlocked if they all get stuck waiting for each other to complete or perform another action. The first can’t finish because it’s waiting for the second to finish. But the second can’t finish because it’s waiting for the first to finish.</p>
-<h2 id="线程安全-Thread-safe"><a href="#线程安全-Thread-safe" class="headerlink" title="线程安全 (Thread safe)"></a>线程安全 (<em>Thread safe</em>)</h2><p>Thread safe code can be safely called from multiple threads or concurrent tasks without causing any problems (data corruption, crashing, etc). Code that is not thread safe must only be run in one context at a time. An example of thread safe code is <code>NSDictionary</code>. You can use it from multiple threads at the same time without issue. On the other hand, <code>NSMutableDictionary</code> is not thread safe and should only be accessed from one thread at a time.</p>
-<h2 id="上下文交换-Context-switch"><a href="#上下文交换-Context-switch" class="headerlink" title="上下文交换 (Context switch)"></a>上下文交换 (<em>Context switch</em>)</h2><p>A context switch is the process of storing and restoring execution state when you switch between executing different threads on a single process. This process is quite common when writing multitasking apps, but comes at a cost of some additional overhead.</p>
-<h1 id="2-并发与并行-Concurrency-vs-Parallelism"><a href="#2-并发与并行-Concurrency-vs-Parallelism" class="headerlink" title="2.并发与并行 (Concurrency vs. Parallelism)"></a>2.并发与并行 (<em>Concurrency vs. Parallelism</em>)</h1><p>Concurrency and parallelism are often mentioned together, so it’s worth a short explanation to distinguish them from each other.</p>
-<p>Separate parts of <em>concurrent</em> code can be executed “simultaneously”. However, it’s up to the system to decide how this happens — or if it happens at all.</p>
-<p>Multi-core devices execute multiple threads at the same time via parallelism; however, in order for single-cored devices to achieve this, they must run a thread, perform a context switch, then run another thread or process. This usually happens quickly enough as to give the illusion of parallel execution as shown by the diagram below:</p>
-<p><img src="markdownImage/Concurrency_vs_Parallelism.png" alt="aaa"></p>
-<p><strong><em>Although you may write your code to use concurrent execution under GCD, it’s up to GCD to decide how much parallelism is required. Parallelism requires concurrency, but concurrency does not guarantee parallelism.</em></strong></p>
-<h1 id="3-队列-Queues"><a href="#3-队列-Queues" class="headerlink" title="3.队列 (Queues)"></a>3.队列 <em>(Queues)</em></h1><p>GCD provides <em>dispatch queues</em> to handle blocks of code; these queues manage the tasks you provide to GCD and execute those tasks in FIFO order.</p>
-<p>All dispatch queues are themselves <em>thread</em>-<em>safe</em> in that you can access them from multiple threads simultaneously. The key to this is to choose the right <em>kind</em> of dispatch queue and the right <em>dispatching function</em> to submit your work to the queue.</p>
-<h2 id="1-串行队列-Serial-queues"><a href="#1-串行队列-Serial-queues" class="headerlink" title="1.串行队列 (Serial queues)"></a>1.串行队列 (<em>Serial queues</em>)</h2><p>Tasks in <em>serial queues</em> execute one at a time, each task starting only after the preceding task has finished. As well, you won’t know the amount of time between one block ending and the next one beginning, as shown in the diagram below:</p>
-<p><img src="markdownImage/Serial-Queue.png" alt=""></p>
-<p>The execution timing of these tasks is under the control of GCD; the only thing you’re guaranteed to know is that GCD executes only one task at a time and that it executes the tasks in the order they were added to the queue.</p>
-<p>Since no two tasks in a serial queue can ever run concurrently, there is no risk they might access the same critical section concurrently; that protects the critical section from race conditions <em>with respect to those tasks</em>only. So if the only way to access that critical section is via a task submitted to that dispatch queue, then you can be sure that the critical section is safe.</p>
-<h2 id="2-并行队列-Concurrent-Queues"><a href="#2-并行队列-Concurrent-Queues" class="headerlink" title="2.并行队列 (Concurrent Queues)"></a>2.并行队列 (<em>Concurrent Queues</em>)</h2><p>Tasks in <em>concurrent queues</em> are guaranteed to start in the order they were added…and that’s about all you’re guaranteed! Items can finish in any order and you have no knowledge of the time it will take for the next block to start, nor the number of blocks that are running at any given time. Again, this is entirely up to GCD.</p>
-<p>The diagram below shows a sample task execution plan of four concurrent tasks under GCD:</p>
-<p><img src="markdownImage/Concurrent-Queue.png" alt=""></p>
-<p>The decision of when to start a block is entirely up to GCD. If the execution time of one block overlaps with another, it’s up to GCD to determine if it should run on a different core, if one is available, or instead to perform a context switch to a different block of code.</p>
-<h2 id="3-队列类型-Queue-types"><a href="#3-队列类型-Queue-types" class="headerlink" title="3.队列类型 (Queue types)"></a>3.队列类型 (<em>Queue types</em>)</h2><h3 id="Main-queue-the-system-provides-you-with-a-special-serial-queue-known-as-the-main-queue-Like-any-serial-queue-tasks-in-this-queue-execute-one-at-a-time-However-it’s-guaranteed-that-all-tasks-will-execute-on-the-main-thread-which-is-the-only-thread-allowed-to-update-your-UI-This-queue-is-the-one-to-use-for-sending-messages-to-UIViews-or-posting-notifications"><a href="#Main-queue-the-system-provides-you-with-a-special-serial-queue-known-as-the-main-queue-Like-any-serial-queue-tasks-in-this-queue-execute-one-at-a-time-However-it’s-guaranteed-that-all-tasks-will-execute-on-the-main-thread-which-is-the-only-thread-allowed-to-update-your-UI-This-queue-is-the-one-to-use-for-sending-messages-to-UIViews-or-posting-notifications" class="headerlink" title="* Main queue : the system provides you with a special serial queue known as the main queue. Like any serial queue, tasks in this queue execute one at a time. However, it’s guaranteed that all tasks will execute on the main thread, which is the only thread allowed to update your UI. This queue is the one to use for sending messages to UIViews or posting notifications."></a><strong>*</strong> <strong>Main queue</strong> : the system provides you with a special serial queue known as the <strong><em>main queue</em></strong>. Like any serial queue, tasks in this queue execute one at a time. However, it’s guaranteed that all tasks will execute on the main thread, which is the only thread allowed to update your UI. This queue is the one to use for sending messages to <code>UIViews</code> or posting notifications.</h3><p>###<strong>*</strong> <strong><em>Global Dispatch Queues</em></strong> : The system also provides you with several concurrent queues. There are currently four global queues of different priority: <strong><em>background</em></strong>, <strong><em>low</em></strong>, <strong><em>default</em></strong>, and <strong><em>high</em></strong>. Be aware that Apple’s APIs also uses these queues, so any tasks you add won’t be the only ones on these queues.</p>
-<h1 id="3-Getting-Started"><a href="#3-Getting-Started" class="headerlink" title="3.Getting Started"></a>3.Getting Started</h1>
       
     </div>
     <footer>
@@ -144,7 +88,7 @@
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="search" name="q" results="0" placeholder="Search">
     <input type="hidden" name="q" value="site:yoursite.com">
   </form>
 </div>
