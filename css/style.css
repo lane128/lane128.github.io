@@ -644,19 +644,16 @@ article footer .addthis iframe {
   font: 0.9em/1.6 "Lato", Helvetica Neue, Helvetica, Arial, sans-serif;
   text-shadow: 0 0 1px #fff;
 }
-.entry {
-table
+.entry table {
   border-collapse: collapse;
 }
-.entry th {
+.entry table th {
   border: 2px solid #000;
-  border-collapse: collapse;
-  padding: 5px 8px 5px;
+  padding: 3px 12px 3px;
   background: #e9e9e9;
 }
-.entry td {
+.entry table td {
   border: 1px solid #808080;
-  border-collapse: collapse;
   padding: 3px 8px 3px;
 }
 .entry .gist {
@@ -726,21 +723,21 @@ figure.highlight pre {
   padding: 0;
   margin: 0;
 }
-.gutter {
+figure.highlight .gutter {
   color: #999;
   padding-right: 15px;
   border-right: 1px solid #ddd;
   text-align: right;
 }
-.code {
+figure.highlight .code {
   padding-left: 15px;
   border-left: 1px solid #fff;
   color: #666;
 }
-.line {
+figure.highlight .line {
   height: 20px;
 }
-.line.marked {
+figure.highlight .line.marked {
   background: #d6d6d6;
 }
 pre .comment,
