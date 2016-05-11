@@ -752,6 +752,10 @@ figure.highlight .line {
 figure.highlight .line.marked {
   background: #d6d6d6;
 }
+figure.highlight table td,
+figure.highlight table tr {
+  border-width: 0px;
+}
 pre .comment,
 pre .template_comment,
 pre .diff .header,
