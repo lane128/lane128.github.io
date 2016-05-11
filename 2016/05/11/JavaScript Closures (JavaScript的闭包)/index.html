@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>新的域名 | Lane128</title>
+  <title>post | Lane128</title>
   <meta name="author" content="Lane128">
   
   <meta name="description" content="A blog of something...">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="新的域名"/>
+  <meta property="og:title" content="post"/>
   <meta property="og:site_name" content="Lane128"/>
 
   
@@ -53,18 +53,25 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-04-18T12:06:01.000Z"><a href="/2016/04/18/Init blog/">2016-04-18</a></time>
+        <time datetime="2016-05-11T07:39:00.000Z"><a href="/2016/05/11/JavaScript Closures (JavaScript的闭包)/">2016-05-11</a></time>
       
       
   
-    <h1 class="title">新的域名</h1>
+    <h1 class="title">post</h1>
   
 
     </header>
     <div class="entry">
       
-        <h3 id="Build-the-blog-with-Hexo"><a href="#Build-the-blog-with-Hexo" class="headerlink" title="Build the blog with Hexo"></a>Build the blog with Hexo</h3><h3 id="Change-domain"><a href="#Change-domain" class="headerlink" title="Change domain"></a>Change domain</h3><p>以前的域名到期了，而且设置CNAME不太友好，就换了个 .me  的域名，买了三年所以应该会一直用(除去被封的情况…)</p>
-<p><a href="http://lane128.me/" target="_blank" rel="external">lane128.me</a></p>
+        <h2 id="JavaScript-Closures-JavaScript的闭包"><a href="#JavaScript-Closures-JavaScript的闭包" class="headerlink" title="JavaScript Closures (JavaScript的闭包)"></a>JavaScript Closures (JavaScript的闭包)</h2><p>先看个例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> add = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> counter = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="keyword">return</span> counter += <span class="number">1</span>;&#125;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">add();</span><br><span class="line">add();</span><br><span class="line">add();</span><br><span class="line"></span><br><span class="line"><span class="comment">// the counter is now 3</span></span><br></pre></td></tr></table></figure></p>
+<p>这里变量 <strong>add</strong> 被分配给一个自引用方法的返回值。</p>
+<blockquote>
+<p>这里我们可以理解 <code>add = function() {return counter += 1;}</code> </p>
+</blockquote>
+<p>这个匿名函数只运行一次，它把变量<code>counter</code> 设置成0，并且返回一个function表达式。</p>
+<p>通过这种方法 <strong>add</strong> 变成了一个方法，更神奇的地方是它能访问父方法的定义域。</p>
+<p>这就叫做javascript的闭包。这种机制让javascript的方法能拥有“私有”变量。</p>
+<p><code>counter</code> 被匿名函数的定义域保护，只能被add方法改变。 </p>
 
       
     </div>
@@ -72,11 +79,6 @@
       
         
         
-  
-  <div class="tags">
-    <a href="/tags/not-matter/">not matter</a>
-  </div>
-
         
   <div class="addthis addthis_toolbox addthis_default_style">
     
@@ -117,7 +119,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://yoursite.com/2016/04/18/Init blog/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://yoursite.com/2016/05/11/JavaScript Closures (JavaScript的闭包)/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
