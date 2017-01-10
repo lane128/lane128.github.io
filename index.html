@@ -54,6 +54,97 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2017-01-10T06:50:25.000Z"><a href="/2017/01/10/fastlane-rvm/">2017-01-10</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/01/10/fastlane-rvm/">Fastlane+RVM使用小结</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="RVM"><a href="#RVM" class="headerlink" title="RVM"></a>RVM</h2><ol>
+<li><p>什么是<a href="https://rvm.io/rvm/about" target="_blank" rel="external">RVM</a>？<br>Ruby enVironment (Version) Manager. 它是一个命令行工具，可以提供一个便捷的多版本 Ruby 环境的管理和切换。</p>
+</li>
+<li><p>RVM的基本使用。 </p>
+<blockquote>
+<p>查看可安装的ruby版本</p>
+</blockquote>
+<p> <code>rvm list known</code></p>
+<blockquote>
+<p>安装指定版本的ruby</p>
+</blockquote>
+<p> <code>rvm install x.x.x</code></p>
+<blockquote>
+<p>查看已经安装过的ruby版本</p>
+</blockquote>
+<p> <code>rvm list</code></p>
+<blockquote>
+<p>使用指定版本的ruby作为现在环境的ruby版本 (如果添加 <code>--default</code> 的flag，那么下次启动终端将自动使用该版本作为ruby的默认版本)</p>
+</blockquote>
+<p> <code>rvm use x.x.x --default</code></p>
+<blockquote>
+<p>卸载已经安装过的ruby版本</p>
+</blockquote>
+<p> <code>rvm remove x.x.x</code></p>
+</li>
+<li><p>RVM的<a href="https://rvm.io/gemsets" target="_blank" rel="external">Gemset</a>使用</p>
+<p> RVM不单单为一个环境提供了不同ruby版本共存的环境，还可以提供不同ruby环境下 <code>gem</code> 环境的的配置，这就是gemset。一个特定的gemset可以视为一个独立虚拟的 <code>Gem</code> 环境。 在一个特定ruby版本下的 gemset 下可以安装不同的libs来构建需要的环境。</p>
+<blockquote>
+<p>建立一个ruby版本是2.3.0，gemset 名字为 testset 的 <code>Gem</code> 环境。</p>
+</blockquote>
+<p> <code>rvm install 2.3.0</code>   #假如 rvm 没有安装2.3.0 ruby</p>
+<p> <code>rvm use 2.3.0</code>       #切换到ruby为2.3.0的版本环境</p>
+<p> <code>rvm gemset create testset</code>   #在当前的ruby环境下建立一个名字为 <code>testset</code> 的gemset环境。</p>
+<p> =&gt; <code>ruby-2.3.0 - #gemset created /Users/lane/.rvm/gems/ruby-2.3.0@testset</code></p>
+<p> =&gt; <code>ruby-2.3.0 - #generating testset wrappers........</code></p>
+<p> <code>rvm use 2.3.0@testset</code>  #使用 ruby 为 2.3.0下的 <code>testset</code> 的gemset</p>
+<p> =&gt; <code>Using /Users/lane/.rvm/gems/ruby-2.3.0 with gemset testset</code></p>
+<p>现在你就拥有一个 2.3.0 版本 ruby 的 gem 环境了。更多的内容参考 <a href="https://rvm.io/" target="_blank" rel="external">RVM官网</a></p>
+</li>
+</ol>
+<h2 id="Fastlane-中-Match-的使用。"><a href="#Fastlane-中-Match-的使用。" class="headerlink" title="Fastlane 中 Match 的使用。"></a>Fastlane 中 Match 的使用。</h2><ol>
+<li><p>Fastlane 的安装</p>
+<p>官方是推荐使用 <code>Gemfile</code> 去定义 <em>fastlane</em> 的依赖库。利用 <a href="https://bundler.io/" target="_blank" rel="external"><code>bundler</code></a> 来快速安装 fastlane。细节请参考<a href="https://docs.fastlane.tools/getting-started/ios/setup/" target="_blank" rel="external">这里</a>.</p>
+</li>
+<li><p><em>Match</em> 的使用</p>
+<p>Match - A new approach to code signing. 是一个用来方便管理你项目的 <em>certificates</em> 和 <em>provisioning profiles</em> 的命令工具。方便的在不同的机器上快速部署这些东西。具体的信息可以参考<a href="https://codesigning.guide/" target="_blank" rel="external">官网介绍</a>.</p>
+</li>
+</ol>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><ol>
+<li><p>由于 Match 是使用私人的 git 库来储存加密过的 <em>certificates</em> 和 <em>provisioning profiles</em> 文件。<br>所以更新或者新配置环境都是需要通过 git 来获取的。 在 macOS 10.12 版本后，需要重新把 rsa 私钥文件添加到 <code>ssh-add</code> 中去。不然在访问 git 的时候会要求你输入 <code>passphrase</code> 参考<a href="http://stackoverflow.com/questions/14757271/git-always-prompts-for-passphrase/14757318" target="_blank" rel="external">这里</a>. fastlane 的 2.4.0 版本没有对这个进行处理，会导致在 Match 获取 git 内容的时候卡住在访问 git 库上。</p>
+</li>
+<li><p>在用 Match 配置好 <code>development</code> 、 <code>adhoc</code> 、 <code>appstore</code> 后，出现 <code>development</code> 的 <em>provisioning profiles</em> 出现与证书不匹配的情况， 请在系统证书中删除并不是当前项目相关的那个证书即可。</p>
+</li>
+</ol>
+<h2 id="team-成员相关文章链接"><a href="#team-成员相关文章链接" class="headerlink" title="team 成员相关文章链接"></a>team 成员相关文章链接</h2><ul>
+<li><a href="http://www.jianshu.com/p/5661000d4d7f" target="_blank" rel="external">配置 fastlane 框架自动化打包发布 iOS 应用</a></li>
+<li><a href="http://www.jianshu.com/p/64ec0571b9af" target="_blank" rel="external">iOS Team中使用 Fastlane match 管理证书和 profile</a></li>
+<li><a href="http://xiaoxinxin.me/2017/01/03/fastlane%E8%AF%81%E4%B9%A6%E5%A4%8D%E7%94%A8/" target="_blank" rel="external">fastlane证书复用</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-06-15T09:53:38.000Z"><a href="/2016/06/15/UIScrollView with Masonry/">2016-06-15</a></time>
       
       
@@ -459,7 +550,7 @@
   
     <li><a href="/tags/JavaScript/">JavaScript</a><small>1</small></li>
   
-    <li><a href="/tags/iOS/">iOS</a><small>2</small></li>
+    <li><a href="/tags/iOS/">iOS</a><small>3</small></li>
   
     <li><a href="/tags/not-matter/">not matter</a><small>1</small></li>
   
@@ -480,6 +571,10 @@
 <div class="widget tag">
   <h3 class="title">Recent Posts</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2017/01/10/fastlane-rvm/">Fastlane+RVM使用小结</a>
+      </li>
     
       <li>
         <a href="/2016/06/15/UIScrollView with Masonry/">UIScrollView with Masonry</a>
@@ -532,7 +627,7 @@
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2016 Lane128
+  &copy; 2017 Lane128
   
 </div>
 <div class="clearfix"></div></footer>
