@@ -67,26 +67,23 @@
 <li><p>什么是<a href="https://rvm.io/rvm/about" target="_blank" rel="external">RVM</a>？<br>Ruby enVironment (Version) Manager. 它是一个命令行工具，可以提供一个便捷的多版本 Ruby 环境的管理和切换。</p>
 </li>
 <li><p>RVM的基本使用。 </p>
-<blockquote>
-<p>查看可安装的ruby版本</p>
-</blockquote>
-<p> <code>rvm list known</code></p>
-<blockquote>
-<p>安装指定版本的ruby</p>
-</blockquote>
-<p> <code>rvm install x.x.x</code></p>
-<blockquote>
-<p>查看已经安装过的ruby版本</p>
-</blockquote>
-<p> <code>rvm list</code></p>
-<blockquote>
-<p>使用指定版本的ruby作为现在环境的ruby版本 (如果添加 <code>--default</code> 的flag，那么下次启动终端将自动使用该版本作为ruby的默认版本)</p>
-</blockquote>
-<p> <code>rvm use x.x.x --default</code></p>
-<blockquote>
-<p>卸载已经安装过的ruby版本</p>
-</blockquote>
-<p> <code>rvm remove x.x.x</code></p>
+<ul>
+<li><p>查看可安装的ruby版本</p>
+<p><code>rvm list known</code></p>
+</li>
+<li><p>安装指定版本的ruby</p>
+<p><code>rvm install x.x.x</code></p>
+</li>
+<li><p>查看已经安装过的ruby版本</p>
+<p><code>rvm list</code></p>
+</li>
+<li><p>使用指定版本的ruby作为现在环境的ruby版本 (如果添加 <code>--default</code> 的flag，那么下次启动终端将自动使用该版本作为ruby的默认版本)</p>
+<p><code>rvm use x.x.x --default</code></p>
+</li>
+<li><p>卸载已经安装过的ruby版本</p>
+<p><code>rvm remove x.x.x</code></p>
+</li>
+</ul>
 </li>
 <li><p>RVM的<a href="https://rvm.io/gemsets" target="_blank" rel="external">Gemset</a>使用</p>
 <p> RVM不单单为一个环境提供了不同ruby版本共存的环境，还可以提供不同ruby环境下 <code>gem</code> 环境的的配置，这就是gemset。一个特定的gemset可以视为一个独立虚拟的 <code>Gem</code> 环境。 在一个特定ruby版本下的 gemset 下可以安装不同的libs来构建需要的环境。</p>
