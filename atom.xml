@@ -3,11 +3,11 @@
   <title></title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://lane128.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
+  <link href="https://lane128.github.io/"/>
   <updated>2022-01-28T11:54:15.820Z</updated>
-  <id>http://example.com/</id>
+  <id>https://lane128.github.io/</id>
   
   <author>
     <name>Adam</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Pod install vs. Pod update (译）</title>
-    <link href="http://example.com/2022/01/28/Pod-install-vs-Pod-update-%E8%AF%91/"/>
-    <id>http://example.com/2022/01/28/Pod-install-vs-Pod-update-%E8%AF%91/</id>
+    <link href="https://lane128.github.io/2022/01/28/Pod-install-vs-Pod-update-%E8%AF%91/"/>
+    <id>https://lane128.github.io/2022/01/28/Pod-install-vs-Pod-update-%E8%AF%91/</id>
     <published>2022-01-28T11:51:40.000Z</published>
     <updated>2022-01-28T11:54:15.820Z</updated>
     
@@ -34,7 +34,7 @@
     
     
     
-    <category term="CocoaPods" scheme="http://example.com/tags/CocoaPods/"/>
+    <category term="CocoaPods" scheme="https://lane128.github.io/tags/CocoaPods/"/>
     
   </entry>
   
